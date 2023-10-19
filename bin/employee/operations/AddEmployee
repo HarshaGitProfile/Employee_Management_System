@@ -1,1 +1,63 @@
+Êþº¾   =   employee/operations/AddEmployee  java/lang/Object URL Ljava/lang/String; 
+ConstantValue 	 %jdbc:oracle:thin:@localhost:1521:orcl USERNAME  	employees PASSWORD  
+employees#123 <init> ()V Code
+     LineNumberTable LocalVariableTable this !Lemployee/operations/AddEmployee; addEmployee K(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V 
+Exceptions  java/sql/SQLException
+     ! isValidName (Ljava/lang/String;)Z
+  # $ ! isValidEmail
+  & ' ! isValidContactNumber	 ) + * java/lang/System , - out Ljava/io/PrintStream; / :Invalid input data. Please check the provided information.
+ 1 3 2 java/io/PrintStream 4 5 println (Ljava/lang/String;)V
+  7 8 9 generateUniqueEmployeeId ()Ljava/lang/String;
+ ; = < java/sql/DriverManager > ? 
+getConnection M(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/sql/Connection; A oINSERT INTO employee_records (employee_id, first_name, last_name, email, contact_number) VALUES (?, ?, ?, ?, ?) C E D java/sql/Connection F G prepareStatement 0(Ljava/lang/String;)Ljava/sql/PreparedStatement; I K J java/sql/PreparedStatement L M 	setString (ILjava/lang/String;)V I O P Q 
+executeUpdate ()I S Employee added successfully! I U V  close
+ X Z Y java/lang/Throwable [ \ 
+addSuppressed (Ljava/lang/Throwable;)V C U 	firstName lastName email 
+contactNumber 
+employeeId 
+connection Ljava/sql/Connection; sql 	statement Ljava/sql/PreparedStatement; 
+StackMapTable j java/lang/String l ^[A-Za-z]+\.?[A-Za-z]*$
+ i n o ! matches name r  ^[A-Za-z0-9]+@[A-Za-z0-9]+\.com$ t \d{10} v %SELECT COUNT(*) FROM employee_records I x y z executeQuery ()Ljava/sql/ResultSet; | ~ } java/sql/ResultSet  € next ()Z | ‚ ƒ „ getInt (I)I † java/lang/StringBuilder ˆ e
+ … Š  5
+ … Œ  Ž append (I)Ljava/lang/StringBuilder;
+ …  ‘ 9 toString “ /Maximum employee limit reached (100 employees).
+  Š – &Failed to generate unique Employee ID. 	resultSet Ljava/sql/ResultSet; count I 
+SourceFile AddEmployee.java !                
+         
+                /     *· ±           	             	            1    
+*¸ ™ +¸ ™ ,¸ "™ 
+-¸ %š ² (.¶ 0±¸ 6:::¸ ::@::	:
+¹ B :¹ H *¹ H +¹ H ,¹ H -¹ H ¹ N W² (R¶ 0Æ =¹ T § 3:	Æ 
+¹ T 	¿:
+	Ç 
+
+:	§ 	
+¥ 
+	
+¶ W	¿Æ =¹ ] § 3:Æ 
+¹ ] ¿:Ç 
+:§ ¥ 
+¶ W¿±  P Ž    E ® ®   ; Í Ü   0 í í       F       $  %  *  ;  ?  P  Z   c ! l " u # ~ $ † % Ž & Í ' (    R   
+ ^     
+ _    
+ `    
+ a   * ã b   ; ¯ c d  ? Ž e   P [ f g  h   N ÿ w  i i i i i X X C i X X I  Xú 
+B X
 
+ø N Xú 
+B X
+
+ù  
+   !     1     *k¶ m¬           +         p    
+ $ !     1     *q¶ m¬           /         `    
+ ' !     1     *s¶ m¬           3         a    
+ 8 9            	   ñKL¸ :MuN::,-¹ B :¹ w :¹ { ™ H¹  6d¢ -» …Y‡· ‰`¶ ‹¶ Æ 
+¹ T ,Æ 	,¹ ] °» Y’· ”¿Æ =¹ T § 3:Æ 
+¹ T ¿:Ç 
+:§ ¥ 
+¶ W¿,Æ /,¹ ] § &K,Æ 	,¹ ] *¿L*Ç +K§ 
+*+¥ *+¶ W*¿» Y•· ”¿    W ‡   n x ‡    c ˜   n ˜ ˜    c Ä   n · Ä    m Ñ   n Ñ Ñ       >    7  8  9   : ) ; 3 < = = D > W C c D m > n @ x C · D ç E    4   Á c d   ¦ e     u f g  ) O — ˜  = ; ™ š  h   M ÿ c 	 X X C i X X I |  iI i ù 	N Xú 
+B X
+
+ø L Xú 
+A X		ù   ›    œ
