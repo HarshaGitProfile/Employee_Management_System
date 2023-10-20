@@ -17,7 +17,7 @@ This Java application, developed using Eclipse IDE and Oracle JDBC, allows you t
 1. **Clone the Repository:**
    
    ```bash
-   git clone https://github.com/your-username/employee-management-system.git
+   git clone https://github.com/HarshaGitProfile/Employee_Management_System
    ```
 
 2. **Open Eclipse IDE:**
